@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSV to Table Converter</title>
+    <style type="text/css">
+      textarea {
+        width: 300px;
+        height: 75px;
+      }
+      td {
+        border: 2px solid #111111;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <div class="enter">
+        <textarea id="csv" placeholder="Enter CSV Text"></textarea>
+      </div>
+      <input type="button" id="convert" value="Convert Input">
+    </form>
+    <div class="table">
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+      $('input#convert').on('click', function() {
+
+        var data = $('textarea#csv').val(),
+            rows = data.split("\n"),
+            output = [],
+            i;
+
+      for (i = 0; i < rows.length; i++) {
+        output.push("<tr><td>" + rows[i]
+          .slice(0, -1)
+          .split(",")
+          .join("</td><td>") + "</td></tr>");
+      }
+
+      output = "<table>" + output.join("") + "</table>";
+      $('body').append(output);
+
+      })
+
+    </script>
+
+  </body>
+</html>
